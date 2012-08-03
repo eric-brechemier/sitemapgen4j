@@ -199,9 +199,12 @@ public class SitemapGeneratorTest extends TestCase {
 		String actual = TestUtil.slurpFileAndDelete(new File(dir, "sitemap1.xml"));
 		assertEquals("sitemap1 didn't match", SITEMAP1, actual);
 		List<File> files = wsg.write();
-		assertEquals(2, files.size());
+
+		assertEquals(3, files.size());
 		assertEquals("First sitemap was misnamed", "sitemap1.xml", files.get(0).getName());
 		assertEquals("Second sitemap was misnamed", "sitemap2.xml", files.get(1).getName());
+		assertEquals("Sitemap index was misnamed", "sitemap.xml", files.get(2).getName());
+
 		actual = TestUtil.slurpFileAndDelete(files.get(1));
 		assertEquals("sitemap2 didn't match", SITEMAP_PLUS_ONE, actual);
 	}
@@ -224,9 +227,10 @@ public class SitemapGeneratorTest extends TestCase {
 		wsg.addUrl("http://www.example.com/19");
 		List<File> files = wsg.write();
 		
-		assertEquals(2, files.size());
+		assertEquals(3, files.size());
 		assertEquals("First sitemap was misnamed", "sitemap1.xml", files.get(0).getName());
 		assertEquals("Second sitemap was misnamed", "sitemap2.xml", files.get(1).getName());
+		assertEquals("Sitemap index was misnamed", "sitemap.xml", files.get(2).getName());
 		
 		String actual = TestUtil.slurpFileAndDelete(files.get(0));
 		assertEquals("sitemap1 didn't match", SITEMAP1, actual);
@@ -244,10 +248,11 @@ public class SitemapGeneratorTest extends TestCase {
 		wsg.addUrl("http://www.example.com/just-one-more");
 		List<File> files = wsg.write();
 		
-		assertEquals(3, files.size());
+		assertEquals(4, files.size());
 		assertEquals("First sitemap was misnamed", "sitemap1.xml", files.get(0).getName());
 		assertEquals("Second sitemap was misnamed", "sitemap2.xml", files.get(1).getName());
 		assertEquals("Third sitemap was misnamed", "sitemap3.xml", files.get(2).getName());
+		assertEquals("Sitemap index was misnamed", "sitemap.xml", files.get(3).getName());
 		
 		String expected = SITEMAP1;
 		String actual = TestUtil.slurpFileAndDelete(files.get(0));

@@ -160,6 +160,9 @@ abstract class SitemapGenerator<U extends ISitemapUrl, THIS extends SitemapGener
 		if (finished) throw new RuntimeException("Sitemap already printed; you must create a new generator to make more sitemaps");
 		if (urls.size() == 0 && mapCount == 0) throw new RuntimeException("No URLs added, sitemap would be empty; you must add some URLs with addUrls");
 		writeSiteMap();
+		if (outFiles.size() > 1 ){
+			writeSitemapIndex(); // create sitemap index
+		}
 		finished = true;
 		return outFiles;
 	}
@@ -174,6 +177,7 @@ abstract class SitemapGenerator<U extends ISitemapUrl, THIS extends SitemapGener
 	
 	private void writeSitemapIndex() {
 		File outFile = new File(baseDir, DEFAULT_SITEMAP_NAME);
+		outFiles.add(outFile);
 		SitemapIndexGenerator sig;
 		try {
 			sig = new SitemapIndexGenerator.Options(baseUrl, outFile).dateFormat(dateFormat).autoValidate(autoValidate).build();
