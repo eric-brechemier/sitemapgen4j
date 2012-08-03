@@ -7,6 +7,10 @@ import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
+import org.apache.ws.commons.util.NamespaceContextImpl;
+import org.w3c.dom.Node;
 
 import junit.framework.TestCase;
 
@@ -87,7 +91,15 @@ public class SitemapGeneratorTest extends TestCase {
 		"</urlset>";
 	File dir;
 	WebSitemapGenerator wsg;
-	
+	XPath xpath = XPathFactory.newInstance().newXPath();
+
+	// setup once
+	public SitemapGeneratorTest(){
+		NamespaceContextImpl namespaceMap = new NamespaceContextImpl();
+		namespaceMap.startPrefixMapping("sm","http://www.sitemaps.org/schemas/sitemap/0.9");
+		xpath.setNamespaceContext(namespaceMap);
+	}
+
 	public void setUp() throws Exception {
 		dir = File.createTempFile(SitemapGeneratorTest.class.getSimpleName(), "");
 		dir.delete();
@@ -207,6 +219,20 @@ public class SitemapGeneratorTest extends TestCase {
 
 		actual = TestUtil.slurpFileAndDelete(files.get(1));
 		assertEquals("sitemap2 didn't match", SITEMAP_PLUS_ONE, actual);
+
+		Node xml = TestUtil.slurpXmlFileAndDelete(files.get(2),xpath);
+		assertEquals("2 sitemaps expected in index",
+			"2",
+			xpath.evaluate("count(/sm:sitemapindex/sm:sitemap)",xml)
+		);
+		assertEquals("First sitemap location is incorrect",
+			"http://www.example.com/sitemap1.xml",
+			xpath.evaluate("/sm:sitemapindex/sm:sitemap[1]/sm:loc",xml)
+		);
+		assertEquals("Second sitemap location is incorrect",
+			"http://www.example.com/sitemap2.xml",
+			xpath.evaluate("/sm:sitemapindex/sm:sitemap[2]/sm:loc",xml)
+		);
 	}
 	
 	public void testMaxUrls() throws Exception {
@@ -237,6 +263,20 @@ public class SitemapGeneratorTest extends TestCase {
 		
 		actual = TestUtil.slurpFileAndDelete(files.get(1));
 		assertEquals("sitemap2 didn't match", SITEMAP2, actual);
+
+		Node xml = TestUtil.slurpXmlFileAndDelete(files.get(2),xpath);
+		assertEquals("2 sitemaps expected in index",
+			"2",
+			xpath.evaluate("count(/sm:sitemapindex/sm:sitemap)",xml)
+		);
+		assertEquals("First sitemap location is incorrect",
+			"http://www.example.com/sitemap1.xml",
+			xpath.evaluate("/sm:sitemapindex/sm:sitemap[1]/sm:loc",xml)
+		);
+		assertEquals("Second sitemap location is incorrect",
+			"http://www.example.com/sitemap2.xml",
+			xpath.evaluate("/sm:sitemapindex/sm:sitemap[2]/sm:loc",xml)
+		);
 	}
 	
 	public void testMaxUrlsTimesTwoPlusOne() throws Exception {
@@ -265,6 +305,24 @@ public class SitemapGeneratorTest extends TestCase {
 		expected = SITEMAP_PLUS_ONE;
 		actual = TestUtil.slurpFileAndDelete(files.get(2));
 		assertEquals("sitemap3 didn't match", expected, actual);
+
+		Node xml = TestUtil.slurpXmlFileAndDelete(files.get(3),xpath);
+		assertEquals("3 sitemaps expected in index",
+			"3",
+			xpath.evaluate("count(/sm:sitemapindex/sm:sitemap)",xml)
+		);
+		assertEquals("First sitemap location is incorrect",
+			"http://www.example.com/sitemap1.xml",
+			xpath.evaluate("/sm:sitemapindex/sm:sitemap[1]/sm:loc",xml)
+		);
+		assertEquals("Second sitemap location is incorrect",
+			"http://www.example.com/sitemap2.xml",
+			xpath.evaluate("/sm:sitemapindex/sm:sitemap[2]/sm:loc",xml)
+		);
+		assertEquals("Third sitemap location is incorrect",
+			"http://www.example.com/sitemap3.xml",
+			xpath.evaluate("/sm:sitemapindex/sm:sitemap[3]/sm:loc",xml)
+		);
 	}
 	
 	public void testGzip() throws Exception {

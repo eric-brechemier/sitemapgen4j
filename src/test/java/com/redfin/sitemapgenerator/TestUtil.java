@@ -5,6 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringReader;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
 
 public class TestUtil {
 	public static String getResourceAsString(Class<?> clazz, String path) {
@@ -37,5 +42,12 @@ public class TestUtil {
 		}
 		file.delete();
 		return sb.toString();
+	}
+
+	public static Node slurpXmlFileAndDelete(File file, XPath xpath) throws Exception {
+		String xml = slurpFileAndDelete(file);
+		InputSource source = new InputSource( new StringReader(xml) );
+		// return the root of the document for further XPath evaluations
+		return (Node) xpath.evaluate("/",source,XPathConstants.NODE);
 	}
 }
