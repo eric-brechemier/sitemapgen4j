@@ -16,7 +16,7 @@ import org.xml.sax.SAXException;
 abstract class SitemapGenerator<U extends ISitemapUrl, THIS extends SitemapGenerator<U,THIS>> {
 	/** 50000 URLs per sitemap maximum */
 	public static final int MAX_URLS_PER_SITEMAP = 50000;
-	public static final String DEFAULT_SITEMAP_NAME = "sitemap_index.xml";
+	public static final String DEFAULT_SITEMAP_NAME = "sitemap.xml";
 
 	private final String baseUrl;
 	private final File baseDir;
