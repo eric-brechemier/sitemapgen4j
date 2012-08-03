@@ -37,6 +37,8 @@ public class SitemapIndexGenerator {
 		private Date defaultLastMod = new Date();
 		private boolean autoValidate = false;
 		// TODO GZIP?  Is that legal for a sitemap index?
+		// A. "Sitemap index files (...) can be compressed."
+		// http://www.sitemaps.org/protocol.html#index
 
 		/**Configures the generator with a base URL and destination to write the sitemap index file.
 		 * 
