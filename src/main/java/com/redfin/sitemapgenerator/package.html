@@ -60,8 +60,7 @@ One sitemap can contain a maximum of 50,000 URLs.  (Some sitemaps, like Google N
 
 <pre name="code" class="java">WebSitemapGenerator wsg = new WebSitemapGenerator("http://www.example.com", myDir);
 for (int i = 0; i &lt; 60000; i++) wsg.addUrl("http://www.example.com/doc"+i+".html");
-wsg.write();
-wsg.writeSitemapsWithIndex(); // generate an index in sitemap.xml
+wsg.write(); // generate sitemap1.xml, sitemap2.xml and index in sitemap.xml
 </pre>
 
 <p>That will generate two sitemaps for 60K URLs: sitemap1.xml (with 50K urls) and sitemap2.xml (with the remaining 10K), and then generate an index in sitemap.xml describing the two.</p>

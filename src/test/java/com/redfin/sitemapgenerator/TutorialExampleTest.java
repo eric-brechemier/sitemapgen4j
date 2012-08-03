@@ -62,7 +62,6 @@ public class TutorialExampleTest extends TestCase {
 		WebSitemapGenerator wsg = new WebSitemapGenerator("http://www.example.com", myDir);
 		for (int i = 0; i < 60000; i++) wsg.addUrl("http://www.example.com/index.html");
 		wsg.write();
-		wsg.writeSitemapsWithIndex(); // generate the sitemap_index.xml
 	}
 	public void testLotsOfUrlsSig() throws Exception {
 		WebSitemapGenerator wsg;
