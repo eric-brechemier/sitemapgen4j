@@ -16,7 +16,8 @@ import org.xml.sax.SAXException;
 abstract class SitemapGenerator<U extends ISitemapUrl, THIS extends SitemapGenerator<U,THIS>> {
 	/** 50000 URLs per sitemap maximum */
 	public static final int MAX_URLS_PER_SITEMAP = 50000;
-	
+	public static final String DEFAULT_SITEMAP_NAME = "sitemap_index.xml";
+
 	private final String baseUrl;
 	private final File baseDir;
 	private final String fileNamePrefix;
@@ -168,7 +169,7 @@ abstract class SitemapGenerator<U extends ISitemapUrl, THIS extends SitemapGener
 	 */
 	public void writeSitemapsWithIndex() {
 		if (!finished) throw new RuntimeException("Sitemaps not generated yet; call write() first");
-		File outFile = new File(baseDir, "sitemap_index.xml");
+		File outFile = new File(baseDir, DEFAULT_SITEMAP_NAME);
 		SitemapIndexGenerator sig;
 		try {
 			sig = new SitemapIndexGenerator.Options(baseUrl, outFile).dateFormat(dateFormat).autoValidate(autoValidate).build();
