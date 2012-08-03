@@ -164,11 +164,15 @@ abstract class SitemapGenerator<U extends ISitemapUrl, THIS extends SitemapGener
 		return outFiles;
 	}
 	
-	/** After you've called {@link #write()}, call this to generate a sitemap index of all sitemaps you generated.  
-	 * 
+	/**
+	 * @deprecated this function does nothing anymore
+	 * Behavior moved to writeSitemapIndex() called automatically
+	 * when several sitemaps are created.
 	 */
 	public void writeSitemapsWithIndex() {
-		if (!finished) throw new RuntimeException("Sitemaps not generated yet; call write() first");
+	}
+	
+	private void writeSitemapIndex() {
 		File outFile = new File(baseDir, DEFAULT_SITEMAP_NAME);
 		SitemapIndexGenerator sig;
 		try {
