@@ -1,0 +1,6 @@
+# ignore output directory
+target
+
+# ignore temporary vim files
+*.swp
+
