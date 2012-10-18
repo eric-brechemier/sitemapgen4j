@@ -17,11 +17,10 @@ public class GoogleGeoSitemapUrl extends WebSitemapUrl {
 		@Override
 		public String toString() {
 			return this.name().toLowerCase();
-		};
+		}
 	}
 	private final Format format;
-	
-	
+
 	/** Options to configure Geo URLs */
 	public static class Options extends AbstractSitemapUrlOptions<GoogleGeoSitemapUrl, Options> {
 		private Format format;
@@ -59,5 +58,4 @@ public class GoogleGeoSitemapUrl extends WebSitemapUrl {
 	public Format getFormat() {
 		return format;
 	}
-
 }

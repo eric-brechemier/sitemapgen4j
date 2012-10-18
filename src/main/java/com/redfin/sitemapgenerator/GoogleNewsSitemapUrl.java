@@ -59,7 +59,6 @@ public class GoogleNewsSitemapUrl extends WebSitemapUrl {
 		public Options keywords(String... keywords) {
 			return keywords(Arrays.asList(keywords));
 		}
-		
 	}
 	
 	/** Specifies an URL and publication date (which is mandatory for Google News) */
@@ -88,8 +87,4 @@ public class GoogleNewsSitemapUrl extends WebSitemapUrl {
 	public String getKeywords() {
 		return keywords;
 	}
-
-
-
-
 }

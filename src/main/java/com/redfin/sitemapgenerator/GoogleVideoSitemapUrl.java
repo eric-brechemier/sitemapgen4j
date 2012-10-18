@@ -222,7 +222,6 @@ public class GoogleVideoSitemapUrl extends WebSitemapUrl {
 			this.durationInSeconds = durationInSeconds;
 			return this;
 		}
-		
 	}
 
 	/** Specifies a landing page URL, together with a "player" (e.g. SWF)
@@ -277,8 +276,7 @@ public class GoogleVideoSitemapUrl extends WebSitemapUrl {
 		if (value == null) return null;
 		return value ? "Yes" : "No";
 	}
-	
-	
+
 	/** Retrieves the {@link Options#playerUrl}*/
 	public URL getPlayerUrl() {
 		return playerUrl;
@@ -343,9 +341,4 @@ public class GoogleVideoSitemapUrl extends WebSitemapUrl {
 	public String getAllowEmbed() {
 		return allowEmbed;
 	}
-
-
-
-
-
 }

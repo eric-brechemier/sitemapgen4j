@@ -35,9 +35,8 @@ public class GoogleMobileSitemapUrl extends WebSitemapUrl {
 		this(new Options(url));
 	}
 
-	/** Specifies configures url with options */
+	/** Configures an url with options */
 	public GoogleMobileSitemapUrl(Options options) {
 		super(options);
-	}
-
+    }
 }
