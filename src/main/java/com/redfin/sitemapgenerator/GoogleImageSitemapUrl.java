@@ -6,8 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * One configurable Google Mobile Search URL.  To configure, use {@link Options}
- *
+ * One configurable Google Image Search URL.  To configure, use {@link Options}
  * @author Claes Mogren
  * @see Options
  * @see <a href="http://support.google.com/webmasters/bin/answer.py?answer=178636">Creating Image Sitemaps</a>
